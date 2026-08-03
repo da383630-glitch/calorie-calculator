@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حاسبة سعرات الأكل - اعرفي سعرات وجبتك بالعربي</title>
+<meta name="description" content="اكتبي اسم الأكلة واعرفي سعراتها الحرارية فورًا. قاعدة بيانات لأكلات مصرية وعربية شائعة.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2448820929956353" crossorigin="anonymous"></script>
+<style>
+  :root{
+    --paper:#FBFBF7; --panel:#FFFFFF; --ink:#14140F;
+    --teal:#0F6E5C; --teal-dark:#0A4B3E; --gold:#C98A1B;
+    --line:#14140F; --muted:#5B5B52;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:'Tajawal', sans-serif; line-height:1.7;}
+  h1,h2,h3{font-family:'Cairo', sans-serif;}
+  .wrap{max-width:760px; margin:0 auto; padding:0 20px;}
+  header{padding:44px 0 30px; border-bottom:3px solid var(--line);}
+  nav.crumbs{font-size:14px; margin-bottom:16px;}
+  nav.crumbs a{color:var(--teal); text-decoration:none; font-weight:700;}
+  .eyebrow{
+    display:inline-block; font-family:'Cairo', sans-serif; font-weight:700;
+    font-size:13px; color:var(--teal-dark); background:rgba(15,110,92,0.09);
+    border:1.5px solid var(--teal-dark); border-radius:999px; padding:5px 14px; margin-bottom:16px;
+  }
+  h1{font-size:clamp(28px,5vw,42px); font-weight:900; margin:0 0 14px;}
+  h1 span{color:var(--teal);}
+  header p{color:var(--muted); font-size:16px; margin:0; max-width:560px;}
+  main{padding:36px 0 70px;}
+
+  .search-box{
+    background:var(--panel); border:2px solid var(--line); border-radius:4px; padding:22px; margin-bottom:20px;
+  }
+  .search-box label{display:block; font-size:14px; font-weight:700; margin-bottom:8px;}
+  .search-box input{
+    width:100%; padding:13px 14px; border:2px solid #d8d6cd; border-radius:4px;
+    font-family:'Tajawal', sans-serif; font-size:16px; background:#fff; color:var(--ink);
+  }
+  .search-box input:focus{outline:3px solid var(--gold); outline-offset:1px; border-color:var(--teal);}
+  .hint{font-size:13px; color:var(--muted); margin-top:8px;}
+
+  .results{margin-top:16px;}
+  .food-row{
+    display:flex; justify-content:space-between; align-items:center;
+    background:#fff; border:2px solid var(--line); border-radius:4px;
+    padding:14px 16px; margin-bottom:10px; cursor:pointer;
+  }
+  .food-row:hover{background:#f2f1ea;}
+  .food-row .fname{font-weight:700; font-size:15px;}
+  .food-row .funit{font-size:12px; color:var(--muted);}
+  .food-row .fcal{font-family:'Cairo', sans-serif; font-weight:900; color:var(--teal-dark); font-size:16px;}
+
+  .selected-card{
+    background:#fff; border:3px solid var(--line); padding:0; margin-top:24px; display:none;
+  }
+  .selected-head{padding:16px 20px 10px; border-bottom:10px solid var(--line);}
+  .selected-head .kicker{font-size:12px; font-weight:700; color:var(--muted);}
+  .selected-head h2{font-size:24px; font-weight:900; margin:2px 0 0;}
+  .qty-row{display:flex; align-items:center; gap:10px; padding:16px 20px;}
+  .qty-row label{font-size:14px; font-weight:700;}
+  .qty-row input{
+    width:90px; padding:10px; border:2px solid #d8d6cd; border-radius:4px;
+    font-family:'Tajawal', sans-serif; font-size:15px;
+  }
+  .total-row{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:14px 20px; border-top:5px solid var(--line);
+  }
+  .total-row .name{font-weight:700;}
+  .total-row .val{font-family:'Cairo', sans-serif; font-weight:900; font-size:28px; color:var(--teal-dark);}
+
+  .ad-slot{
+    margin:32px 0; border:2px dashed #c9c7bd; border-radius:4px; padding:22px;
+    text-align:center; font-size:13px; color:var(--muted); font-family:'Cairo', sans-serif;
+  }
+  section.info{margin-top:44px; padding-top:32px; border-top:3px solid var(--line);}
+  section.info h2{font-size:22px; margin-bottom:12px;}
+  section.info p{color:var(--muted);}
+  footer{border-top:3px solid var(--line); padding:28px 0; font-size:13px; color:var(--muted); text-align:center;}
+  footer a{color:var(--muted);}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <nav class="crumbs"><a href="index.html">← حاسبة السعرات</a></nav>
+  <span class="eyebrow">أداة مجانية · بدون تسجيل</span>
+  <h1>احسبي <span>سعرات أكلك</span></h1>
+  <p>اكتبي اسم الأكلة اللي كلتيها واعرفي سعراتها الحرارية فورًا، من قاعدة بيانات أكلات مصرية وعربية شائعة.</p>
+</header>
+
+<main class="wrap">
+  <div class="search-box">
+    <label for="foodSearch">دوّري على أكلة</label>
+    <input type="text" id="foodSearch" placeholder="مثال: كشري، فول، أرز، فراخ مشوية...">
+    <div class="hint">اكتبي أول حرفين أو تلاتة وهيظهرلك النتايج تلقائيًا</div>
+  </div>
+
+  <div class="results" id="resultsList"></div>
+
+  <div class="selected-card" id="selectedCard">
+    <div class="selected-head">
+      <div class="kicker">اخترتِ</div>
+      <h2 id="selectedName">-</h2>
+    </div>
+    <div class="qty-row">
+      <label for="qtyInput">الكمية (عدد الحصص)</label>
+      <input type="number" id="qtyInput" value="1" min="0.25" step="0.25">
+    </div>
+    <div class="total-row">
+      <span class="name">إجمالي السعرات</span>
+      <span class="val" id="totalCal">-</span>
+    </div>
+  </div>
+
+  <div class="ad-slot">مساحة إعلانية — تتفعّل بعد تركيب Google AdSense</div>
+
+  <section class="info">
+    <h2>ملاحظة عن الأرقام</h2>
+    <p>السعرات المذكورة تقريبية ولحصة/كمية متوسطة شائعة، وممكن تختلف حسب طريقة التحضير وكمية الزيت أو السكر المضافة. لو عايزة رقم دقيق لاحتياجك اليومي الكامل، جربي حاسبة السعرات الرئيسية.</p>
+  </section>
+</main>
+
+<footer>
+  هذه الأداة للإرشاد العام فقط وليست بديلاً عن استشارة طبية أو تغذوية متخصصة.
+  <br>
+  <a href="index.html">الرئيسية</a> · <a href="bmi.html">حاسبة BMI</a> · <a href="guide.html">الدليل</a> · <a href="about.html">من نحن</a> · <a href="privacy.html">سياسة الخصوصية</a>
+</footer>
+
+<script>
+  const foods = [
+    {name:"أرز أبيض مطهو", unit:"كوب (150 جم)", cal:205},
+    {name:"أرز بسمتي مطهو", unit:"كوب (150 جم)", cal:190},
+    {name:"خبز بلدي", unit:"رغيف", cal:150},
+    {name:"خبز فينو", unit:"رغيف صغير", cal:120},
+    {name:"عيش شامي", unit:"رغيف", cal:170},
+    {name:"كشري", unit:"طبق متوسط", cal:450},
+    {name:"فول مدمس بزيت", unit:"طبق (200 جم)", cal:260},
+    {name:"فول مدمس سادة", unit:"طبق (200 جم)", cal:190},
+    {name:"طعمية (فلافل)", unit:"3 قطع", cal:180},
+    {name:"ملوخية بفراخ", unit:"طبق متوسط", cal:280},
+    {name:"محشي ورق عنب", unit:"5 قطع", cal:220},
+    {name:"محشي كرنب", unit:"5 قطع", cal:200},
+    {name:"بامية باللحمة", unit:"طبق متوسط", cal:320},
+    {name:"مكرونة بشاميل", unit:"طبق (250 جم)", cal:480},
+    {name:"مكرونة بالصلصة", unit:"طبق (250 جم)", cal:350},
+    {name:"فراخ مشوية بدون جلد", unit:"100 جم", cal:165},
+    {name:"فراخ مقلية", unit:"قطعة متوسطة", cal:320},
+    {name:"كفتة مشوية", unit:"100 جم", cal:250},
+    {name:"لحمة مشوية", unit:"100 جم", cal:220},
+    {name:"سمك مشوي (بلطي)", unit:"قطعة متوسطة", cal:180},
+    {name:"سمك مقلي", unit:"قطعة متوسطة", cal:280},
+    {name:"جبنة بيضاء قليلة الدسم", unit:"30 جم", cal:60},
+    {name:"جبنة رومي", unit:"30 جم", cal:110},
+    {name:"بيضة مسلوقة", unit:"1 بيضة", cal:78},
+    {name:"بيضة مقلية", unit:"1 بيضة", cal:120},
+    {name:"عدس أصفر مطهو", unit:"كوب", cal:230},
+    {name:"شوربة عدس", unit:"طبق", cal:150},
+    {name:"سلطة خضراء بدون صوص", unit:"طبق", cal:35},
+    {name:"طحينة", unit:"ملعقة كبيرة", cal:90},
+    {name:"بطاطس مقلية", unit:"طبق صغير", cal:310},
+    {name:"بطاطس مسلوقة", unit:"حبة متوسطة", cal:110},
+    {name:"موز", unit:"حبة متوسطة", cal:105},
+    {name:"تفاح", unit:"حبة متوسطة", cal:95},
+    {name:"برتقال", unit:"حبة متوسطة", cal:65},
+    {name:"مانجو", unit:"حبة متوسطة", cal:135},
+    {name:"عنب", unit:"كوب", cal:100},
+    {name:"بطيخ", unit:"شريحة متوسطة", cal:85},
+    {name:"زبادي كامل الدسم", unit:"كوب", cal:150},
+    {name:"زبادي خالي الدسم", unit:"كوب", cal:90},
+    {name:"لبن كامل الدسم", unit:"كوب", cal:150},
+    {name:"لبن خالي الدسم", unit:"كوب", cal:85},
+    {name:"شاي بسكر", unit:"كوب", cal:40},
+    {name:"قهوة بسكر", unit:"كوب", cal:35},
+    {name:"عصير مانجو", unit:"كوب", cal:130},
+    {name:"كولا", unit:"علبة", cal:140},
+    {name:"شيبسي", unit:"كيس صغير", cal:150},
+    {name:"شوكولاتة", unit:"30 جم", cal:160},
+    {name:"بسكويت", unit:"3 قطع", cal:150},
+    {name:"مكسرات مشكلة", unit:"30 جم", cal:180},
+    {name:"عسل أبيض", unit:"ملعقة كبيرة", cal:65},
+    {name:"زيت زيتون", unit:"ملعقة كبيرة", cal:120},
+    {name:"سمنة بلدي", unit:"ملعقة كبيرة", cal:125},
+    {name:"عيش بالطعمية (ساندوتش)", unit:"1 ساندوتش", cal:280},
+    {name:"شاورما فراخ", unit:"1 ساندوتش", cal:400},
+    {name:"برجر", unit:"1 قطعة", cal:350},
+    {name:"بيتزا", unit:"سلايس متوسط", cal:270},
+    {name:"حمص شام", unit:"طبق صغير", cal:180},
+    {name:"بابا غنوج", unit:"طبق صغير", cal:150},
+    {name:"رز بلبن", unit:"طبق صغير", cal:220},
+    {name:"أم علي", unit:"طبق صغير", cal:400},
+    {name:"كنافة", unit:"قطعة متوسطة", cal:350},
+    {name:"بقلاوة", unit:"قطعة واحدة", cal:220},
+    {name:"دونات", unit:"1 قطعة", cal:250},
+  ];
+
+  const searchInput = document.getElementById('foodSearch');
+  const resultsList = document.getElementById('resultsList');
+  const selectedCard = document.getElementById('selectedCard');
+  const selectedName = document.getElementById('selectedName');
+  const qtyInput = document.getElementById('qtyInput');
+  const totalCal = document.getElementById('totalCal');
+
+  let currentFood = null;
+
+  function renderResults(query) {
+    resultsList.innerHTML = '';
+    if (!query || query.trim().length < 1) return;
+
+    const matches = foods.filter(f => f.name.includes(query.trim()));
+    matches.slice(0, 8).forEach(f => {
+      const row = document.createElement('div');
+      row.className = 'food-row';
+      row.innerHTML = `
+        <div>
+          <div class="fname">${f.name}</div>
+          <div class="funit">${f.unit}</div>
+        </div>
+        <div class="fcal">${f.cal} سعرة</div>
+      `;
+      row.addEventListener('click', () => selectFood(f));
+      resultsList.appendChild(row);
+    });
+  }
+
+  function selectFood(food) {
+    currentFood = food;
+    selectedName.textContent = `${food.name} (${food.unit})`;
+    qtyInput.value = 1;
+    updateTotal();
+    selectedCard.style.display = 'block';
+    resultsList.innerHTML = '';
+    searchInput.value = '';
+  }
+
+  function updateTotal() {
+    if (!currentFood) return;
+    const qty = parseFloat(qtyInput.value) || 0;
+    const total = Math.round(currentFood.cal * qty);
+    totalCal.textContent = total + ' سعرة';
+  }
+
+  searchInput.addEventListener('input', (e) => renderResults(e.target.value));
+  qtyInput.addEventListener('input', updateTotal);
+</script>
+
+</body>
+</html>
