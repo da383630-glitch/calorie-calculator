@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حاسبة مؤشر كتلة الجسم BMI - اعرفي وزنك المثالي</title>
+<meta name="description" content="احسبي مؤشر كتلة جسمك (BMI) مجانًا واعرفي هل وزنك في المعدل الطبيعي حسب طولك.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2448820929956353" crossorigin="anonymous"></script>
+<style>
+  :root{
+    --paper:#FBFBF7;
+    --panel:#FFFFFF;
+    --ink:#14140F;
+    --teal:#0F6E5C;
+    --teal-dark:#0A4B3E;
+    --gold:#C98A1B;
+    --line:#14140F;
+    --muted:#5B5B52;
+    --warn:#B3401C;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Tajawal', sans-serif;
+    line-height:1.7;
+  }
+  h1,h2,h3,.label-font{font-family:'Cairo', sans-serif;}
+  .wrap{max-width:960px; margin:0 auto; padding:0 20px;}
+  header.hero{padding:48px 0 36px; border-bottom:3px solid var(--line);}
+  nav.crumbs{font-size:14px; margin-bottom:18px;}
+  nav.crumbs a{color:var(--teal); text-decoration:none; font-weight:700;}
+  .eyebrow{
+    display:inline-block; font-family:'Cairo', sans-serif; font-weight:700;
+    font-size:13px; letter-spacing:0.5px; color:var(--teal-dark);
+    background:rgba(15,110,92,0.09); border:1.5px solid var(--teal-dark);
+    border-radius:999px; padding:5px 14px; margin-bottom:18px;
+  }
+  h1{font-size:clamp(28px,5vw,44px); font-weight:900; margin:0 0 16px; line-height:1.25;}
+  h1 span{color:var(--teal);}
+  .hero p{font-size:17px; color:var(--muted); max-width:600px; margin:0;}
+  main{padding:48px 0 80px;}
+  .grid{display:grid; grid-template-columns:1fr; gap:32px;}
+  @media(min-width:820px){ .grid{grid-template-columns:1fr 1fr; align-items:start;} }
+  .card{background:var(--panel); border:2px solid var(--line); border-radius:4px; padding:28px;}
+  .card h2{font-size:20px; font-weight:700; margin:0 0 22px;}
+  .field{margin-bottom:18px;}
+  .field label{display:block; font-size:14px; font-weight:700; margin-bottom:6px;}
+  .field input{
+    width:100%; padding:11px 12px; border:2px solid #d8d6cd; border-radius:4px;
+    font-family:'Tajawal', sans-serif; font-size:15px; background:#fff; color:var(--ink);
+  }
+  .field input:focus{outline:3px solid var(--gold); outline-offset:1px; border-color:var(--teal);}
+  .calc-btn{
+    width:100%; padding:14px; background:var(--teal); color:#fff; border:none;
+    border-radius:4px; font-family:'Cairo', sans-serif; font-weight:900; font-size:17px;
+    cursor:pointer; margin-top:6px; transition:background .15s;
+  }
+  .calc-btn:hover{background:var(--teal-dark);}
+  .calc-btn:focus-visible{outline:3px solid var(--gold); outline-offset:2px;}
+
+  .label-card{background:#fff; border:3px solid var(--line); padding:0; position:sticky; top:20px;}
+  .label-head{padding:16px 20px 10px; border-bottom:10px solid var(--line);}
+  .label-head .kicker{font-size:12px; font-weight:700; letter-spacing:.5px; color:var(--muted);}
+  .label-head h2{font-size:30px; font-weight:900; margin:2px 0 0;}
+  .bmi-number{
+    padding:24px 20px 8px; text-align:center; font-family:'Cairo', sans-serif;
+    font-weight:900; font-size:56px; color:var(--teal-dark);
+  }
+  .bmi-category{
+    text-align:center; font-family:'Cairo', sans-serif; font-weight:700;
+    font-size:18px; padding-bottom:20px; border-bottom:5px solid var(--line);
+  }
+  .scale{padding:18px 20px;}
+  .scale-row{display:flex; justify-content:space-between; padding:6px 0; font-size:14px; border-bottom:1px solid #eee;}
+  .scale-row .range{color:var(--muted);}
+  .scale-row.active{font-weight:700; color:var(--teal-dark);}
+  .label-foot{padding:16px 20px 20px; font-size:13px; color:var(--muted);}
+  .placeholder-note{padding:40px 20px; text-align:center; color:var(--muted); font-size:15px;}
+  .ad-slot{
+    margin-top:28px; border:2px dashed #c9c7bd; border-radius:4px; padding:22px;
+    text-align:center; font-size:13px; color:var(--muted); font-family:'Cairo', sans-serif;
+  }
+  section.info{margin-top:56px; padding-top:36px; border-top:3px solid var(--line);}
+  section.info h2{font-size:24px; margin-bottom:14px;}
+  section.info p{color:var(--muted); max-width:720px;}
+  .cross-link{
+    display:inline-block; margin-top:20px; padding:12px 20px; border:2px solid var(--line);
+    border-radius:4px; text-decoration:none; color:var(--ink); font-family:'Cairo', sans-serif;
+    font-weight:700; font-size:14px;
+  }
+  footer{border-top:3px solid var(--line); padding:28px 0; font-size:13px; color:var(--muted); text-align:center;}
+  footer a{color:var(--muted);}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <nav class="crumbs"><a href="index.html">← حاسبة السعرات</a></nav>
+    <span class="eyebrow">أداة مجانية · بدون تسجيل</span>
+    <h1>احسبي <span>مؤشر كتلة جسمك</span> BMI</h1>
+    <p>اعرفي هل وزنك في المعدل الطبيعي مقارنة بطولك، في ثانية واحدة.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="grid">
+    <div class="card">
+      <h2>بياناتك</h2>
+
+      <div class="field">
+        <label for="weight">الوزن (كجم)</label>
+        <input type="number" id="weight" placeholder="مثال: 65" min="30" max="250">
+      </div>
+
+      <div class="field">
+        <label for="height">الطول (سم)</label>
+        <input type="number" id="height" placeholder="مثال: 165" min="120" max="230">
+      </div>
+
+      <button class="calc-btn" id="calcBtn">احسبي المؤشر</button>
+    </div>
+
+    <div class="label-card" id="resultCard">
+      <div class="label-head">
+        <div class="kicker">نتيجتك</div>
+        <h2>مؤشر كتلة الجسم</h2>
+      </div>
+      <div class="placeholder-note" id="placeholderNote">
+        دخّلي وزنك وطولك على اليمين واضغطي "احسبي المؤشر".
+      </div>
+      <div id="resultBody" style="display:none;">
+        <div class="bmi-number" id="bmiValue">-</div>
+        <div class="bmi-category" id="bmiCategory">-</div>
+        <div class="scale" id="scaleList">
+          <div class="scale-row" data-range="under"><span>نحافة</span><span class="range">أقل من 18.5</span></div>
+          <div class="scale-row" data-range="normal"><span>طبيعي</span><span class="range">18.5 – 24.9</span></div>
+          <div class="scale-row" data-range="over"><span>زيادة وزن</span><span class="range">25 – 29.9</span></div>
+          <div class="scale-row" data-range="obese"><span>سمنة</span><span class="range">30 فأكثر</span></div>
+        </div>
+        <div class="label-foot">
+          مؤشر كتلة الجسم مقياس تقريبي عام ولا يأخذ في الاعتبار الكتلة العضلية. للحالات الرياضية أو الصحية الخاصة استشيري مختصًا.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ad-slot">مساحة إعلانية — تتفعّل بعد تركيب Google AdSense</div>
+
+  <section class="info">
+    <h2>إيه هو مؤشر كتلة الجسم؟</h2>
+    <p>مؤشر كتلة الجسم (BMI) مقياس بسيط بيقارن وزنك بطولك، وبيُستخدم عالميًا كمؤشر تقريبي سريع لمعرفة هل الوزن في نطاق صحي أم لا. هو مش مقياس دقيق 100% (مثلاً ما بيفرقش بين العضلات والدهون)، لكنه نقطة بداية جيدة لمتابعة وزنك.</p>
+    <p>بعد ما تعرفي مؤشرك، ممكن تعرفي احتياجك اليومي من السعرات عشان تبني خطة غذائية مناسبة لهدفك.</p>
+    <a href="index.html" class="cross-link">جربي حاسبة السعرات الحرارية ←</a>
+  </section>
+</main>
+
+<footer>
+  هذه الأداة للإرشاد العام فقط وليست بديلاً عن استشارة طبية متخصصة.
+  <br>
+  <a href="index.html">الرئيسية</a> · <a href="food.html">سعرات الأكل</a> · <a href="guide.html">الدليل</a> · <a href="about.html">من نحن</a> · <a href="privacy.html">سياسة الخصوصية</a>
+</footer>
+
+<script>
+  document.getElementById('calcBtn').addEventListener('click', () => {
+    const weight = parseFloat(document.getElementById('weight').value);
+    const heightCm = parseFloat(document.getElementById('height').value);
+
+    if (!weight || !heightCm) {
+      alert('من فضلك دخّلي الوزن والطول الأول.');
+      return;
+    }
+
+    const heightM = heightCm / 100;
+    const bmi = weight / (heightM * heightM);
+    const bmiRounded = Math.round(bmi * 10) / 10;
+
+    let category, rangeKey;
+    if (bmi < 18.5) { category = 'نحافة'; rangeKey = 'under'; }
+    else if (bmi < 25) { category = 'وزن طبيعي'; rangeKey = 'normal'; }
+    else if (bmi < 30) { category = 'زيادة وزن'; rangeKey = 'over'; }
+    else { category = 'سمنة'; rangeKey = 'obese'; }
+
+    document.getElementById('bmiValue').textContent = bmiRounded;
+    document.getElementById('bmiCategory').textContent = category;
+
+    document.querySelectorAll('.scale-row').forEach(row => {
+      row.classList.toggle('active', row.dataset.range === rangeKey);
+    });
+
+    document.getElementById('placeholderNote').style.display = 'none';
+    document.getElementById('resultBody').style.display = 'block';
+  });
+</script>
+
+</body>
+</html>
